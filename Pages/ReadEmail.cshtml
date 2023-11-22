@@ -1,0 +1,44 @@
+﻿@page
+@model FinalProject.Pages.ReadEmailModel
+
+<h2>Read Email</h2>
+
+<form method="post" action="/SendEmail">
+    @for (var i = 0; i < Model.listEmails.Count; i++)
+    {
+        var email = Model.listEmails[i];
+        <div>
+            <div class="form-group">
+                <label class="col-sm-3 col-form-label">Sender Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="EmailSender_@i" name="Sender" value="@email.EmailSender" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 col-form-label">Subject</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="subject_@i" name="EmailSubject" value="@email.EmailSubject" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message_@i">Message:</label>
+                <textarea class="form-control" id="message_@i" name="EmailMessage" rows="4" required>
+                    @email.EmailMessage
+                    </textarea>
+            </div>
+        </div> 
+    }
+
+
+
+    <button type="submit" class="btn btn-primary">Send Email</button>
+</form>
+
+@if (Model.listEmails.Count == 0)
+{
+    <p>No emails found.</p>
+}
+
+<a class="btn btn-primary btn-sm" href="/index">Home</a>

@@ -12,7 +12,7 @@
             <th>From</th>
             <th>Subject</th>
             <th>Date/Time</th>
-            <th>Home</th>
+            <th>Delete</th>
         </tr>
     </thread>
 
@@ -23,13 +23,29 @@
                 <td>@item.EmailSender</td>
                 <td>
                     @if (item.EmailIsRead.Equals("0")) {
-                        <img src="images/yellow.gif" height="10pt"> 
-                    } 
+                        <img src="images/yellow.gif" height="10pt">
+
+                    }
+                    else if (item.EmailIsRead.Equals("1"))
+                    {
+                        <img src="images/images.png" height="10pt">
+                    }
+
+
+
+
+
                     <a href="ReadEmail?emailid=@item.EmailID">@item.EmailSubject</a></td>
                 <td>@item.EmailDate</td>
                 <td>
+
+
+                    <a class="btn btn-primary btn-sm" href="ReadEmail?emailid=@item.EmailID">Read</a>
                     <a class="btn btn-primary btn-sm" href="DeleteEmail?emailid=@item.EmailID">Delete</a>
+                
+
                 </td>
+
             </tr>
         }
     </tbody>

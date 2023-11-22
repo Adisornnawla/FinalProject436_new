@@ -22,7 +22,7 @@ namespace FinalProject.Pages
         {
             try
             {
-                String connectionString = "Server=tcp:buem.database.windows.net,1433;Initial Catalog=buem;Persist Security Info=False;User ID=[USERNAME];Password=[PASSWORD];MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:adis.database.windows.net,1433;Initial Catalog=project_2;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
@@ -48,10 +48,10 @@ namespace FinalProject.Pages
                                 emailInfo.EmailSubject = reader.GetString(1);
                                 emailInfo.EmailMessage = reader.GetString(2);
                                 emailInfo.EmailDate = reader.GetDateTime(3).ToString();
-                                emailInfo.EmailIsRead = "" + reader.GetInt32(4);
+                                emailInfo.EmailIsRead = reader.GetString(4);
                                 emailInfo.EmailSender = reader.GetString(5);
                                 emailInfo.EmailReceiver = reader.GetString(6);
-
+                                Console.WriteLine($"Read email: ID = {emailInfo.EmailID}, Sender = {emailInfo.EmailSender}, Subject = {emailInfo.EmailSubject}");
                                 listEmails.Add(emailInfo);
                             }
                         }
