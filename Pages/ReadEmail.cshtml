@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="message_@i">Message:</label>
-                <textarea class="form-control" id="message_@i" name="EmailMessage" rows="4" required>
+                <textarea class="form-control" id="message_@i" name="EmailMessage" rows="4"  required>
                     @email.EmailMessage
                     </textarea>
             </div>
@@ -33,7 +33,7 @@
 
 
 
-    <button type="submit" class="btn btn-primary">Send Email</button>
+    
 </form>
 
 @if (Model.listEmails.Count == 0)

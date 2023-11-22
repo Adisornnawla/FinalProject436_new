@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using static Humanizer.In;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinalProject.Pages
 {
@@ -25,12 +27,13 @@ namespace FinalProject.Pages
 				{
 					connection.Open();
 					String sql = "SELECT * FROM emails WHERE emailid=@emailid";
-					using (SqlCommand command = new SqlCommand(sql, connection))
-					{
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
 
-						command.Parameters.AddWithValue("@emailid", emailid);
+                        command.Parameters.AddWithValue("@emailid", emailid);
 						using (SqlDataReader reader = command.ExecuteReader())
 						{
+							
 							while (reader.Read())
 							{
 								EmailInfo emailInfo = new EmailInfo();
@@ -47,7 +50,14 @@ namespace FinalProject.Pages
 							}
 						}
 					}
-				};
+					String sql2 = "UPDATE emails SET emailisread = 1 WHERE emailid = @emailid";
+					using (SqlCommand command2 = new SqlCommand(sql2, connection))
+					{
+						command2.Parameters.AddWithValue("@emailid", emailid);
+						command2.ExecuteNonQuery();
+					}
+
+                };
 			}
 			catch (Exception ex)
 			{

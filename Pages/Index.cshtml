@@ -28,7 +28,8 @@
                     }
                     else if (item.EmailIsRead.Equals("1"))
                     {
-                        <img src="images/images.png" height="10pt">
+                        //<img src="images/images.png" height="10pt">
+                        
                     }
 
 
@@ -36,11 +37,15 @@
 
 
                     <a href="ReadEmail?emailid=@item.EmailID">@item.EmailSubject</a></td>
+
+
                 <td>@item.EmailDate</td>
                 <td>
 
 
-                    <a class="btn btn-primary btn-sm" href="ReadEmail?emailid=@item.EmailID">Read</a>
+                    
+
+
                     <a class="btn btn-primary btn-sm" href="DeleteEmail?emailid=@item.EmailID">Delete</a>
                 
 
