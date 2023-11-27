@@ -22,7 +22,7 @@ namespace FinalProject.Pages
         {
             try
             {
-                String connectionString = "Server=tcp:adis.database.windows.net,1433;Initial Catalog=project_2;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                String connectionString = "Server=tcp:adis123.database.windows.net,1433;Initial Catalog=adis;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();

@@ -4,6 +4,7 @@
 <h2>Read Email</h2>
 
 <form method="post" action="/SendEmail">
+
     @for (var i = 0; i < Model.listEmails.Count; i++)
     {
         var email = Model.listEmails[i];
@@ -36,7 +37,7 @@
     
 </form>
 
-@if (Model.listEmails.Count == 0)
+cd@if (Model.listEmails.Count == 0)
 {
     <p>No emails found.</p>
 }
