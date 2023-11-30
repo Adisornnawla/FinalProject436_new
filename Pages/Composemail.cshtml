@@ -1,6 +1,21 @@
 ﻿@page
 @model ComposeEmailModel
-@{
+
+<style>
+    /* Custom styles for a cleaner look */
+    body {
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        color: #000000; /* Black text color */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
 
 }
 <h2>Compose New Email</h2>
@@ -16,17 +31,19 @@
 
 <form method="post" action="/SendEmail">
     <div class="form-group">
-        <label class="col-sm-3 col-form-label">SenderEmail</label>
-		<div class="col-sm-6">
-        <input type="text" class="form-control" id="EmailSender" name="Sender" required>
+            <label class="col-sm-3 col-form-label">Receiver Email</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="EmailReceiver" name="EmailReceiver" required>
+            </div>
     </div>
 
 
 
 	<div class="form-group">
 		<label class="col-sm-3 col-form-label">Subject</label>
-		<div class="col-sm-6">
-		<input type="text" class="form-control" id="Emailsubject" name="Subject" required>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="Emailsubject" name="EmailSubject" required>
+            </div>
 	</div>
 
 
@@ -40,7 +57,6 @@
 
 
 
-	<button type="submit" class="btn btn-primary">Send Email</button>
 
 
 
@@ -56,4 +72,6 @@
 		</div>
 	}
 </form>
+</div>
+
 <a class="btn btn-primary btn-sm" href="/index">Home</a>
