@@ -7,14 +7,17 @@
 <center><img src="images/logo.jpg" width="400" /></center>
 
 <table class="table">
-    <thread>
+    <thead>
+        <!-- Corrected tag name -->
         <tr>
             <th>From</th>
             <th>Subject</th>
             <th>Date/Time</th>
             <th>Delete</th>
         </tr>
-    </thread>
+    </thead>
+    <!-- ... rest of the code ... -->
+
 
     <tbody>
         @foreach (var item in Model.listEmails)
@@ -55,4 +58,6 @@
         }
     </tbody>
 </table>
-<a class="btn btn-primary btn-sm" href="/ComposeMail?Sender=@User.Identity.Name">Compose New Email</a>
+
+
+<a class="btn btn-primary btn-sm" href="/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>

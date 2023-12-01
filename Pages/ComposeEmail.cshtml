@@ -1,0 +1,112 @@
+﻿@page
+@model ComposeEmailModel
+<style>
+    /* Custom styles for a cleaner look */
+    body {
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        color: #000000; /* Black text color */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    /* Center the form on the screen */
+    .center-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff; /* White background for the form */
+        padding: 20px;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+    }
+
+    /* Style the button */
+    .btn-primary {
+        background-color: #ffffff; /* White background for the button */
+        color: #1134A6; /* Blue text color for the button */
+        border-color: #1134A6;
+    }
+
+        .btn-primary:hover {
+            background-color: #1134A6; /* Blue background on hover */
+            color: #ffffff; /* White text color on hover */
+            border-color: #1134A6;
+        }
+</style>
+
+
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="center-form">
+
+    <form method="post" action="">
+        <div class="form-group">
+            <label class="col-sm-3 col-form-label">Sender Email</label>
+            <div class="col-sm-9">
+                
+                <input type="text" class="form-control" id="EmailSender" name="emailreceiver" required value="@Model.emailInfo.EmailReceiver">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 col-form-label">Subject</label>
+            <div class="col-sm-9">
+                
+                <input type="text" class="form-control" id="Emailsubject" name="emailsubject" required value="@Model.emailInfo.EmailSubject">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message:</label>
+            
+            <textarea class="form-control" id="message" name="emailmessage" rows="10" required>@Model.emailInfo.EmailMessage</textarea>
+        </div>
+
+
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">Send Email</button>
+            <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+        </div>
+
+
+
+        @if (Model.successMessage.Length > 0)
+        {
+            <div class="row mb-3">
+                <div class="col-sm-9">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.successMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+
+<script>
+    function clearForm() {
+        // Clear form fields
+        document.getElementById("EmailSender").value = "";
+        document.getElementById("Emailsubject").value = "";
+        document.getElementById("message").value = "";
+    }
+</script>

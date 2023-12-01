@@ -1,45 +1,86 @@
 ﻿@page
 @model FinalProject.Pages.ReadEmailModel
 
-<h2>Read Email</h2>
-
-<form method="post" action="/SendEmail">
-
-    @for (var i = 0; i < Model.listEmails.Count; i++)
-    {
-        var email = Model.listEmails[i];
-        <div>
-            <div class="form-group">
-                <label class="col-sm-3 col-form-label">Sender Email</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="EmailSender_@i" name="Sender" value="@email.EmailSender" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-3 col-form-label">Subject</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="subject_@i" name="EmailSubject" value="@email.EmailSubject" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="message_@i">Message:</label>
-                <textarea class="form-control" id="message_@i" name="EmailMessage" rows="4"  required>
-                    @email.EmailMessage
-                    </textarea>
-            </div>
-        </div> 
+<style>
+    /* Custom styles for a cleaner look */
+    body {
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+        color: #000000; /* Black text color */
     }
 
+    .form-group {
+        margin-bottom: 20px;
+    }
 
+    label {
+        font-weight: bold;
+    }
 
-    
-</form>
+    textarea {
+        resize: vertical;
+    }
 
-cd@if (Model.listEmails.Count == 0)
-{
-    <p>No emails found.</p>
-}
+    /* Center the form on the screen */
+    .center-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff; /* White background for the form */
+        padding: 20px;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+    }
 
-<a class="btn btn-primary btn-sm" href="/index">Home</a>
+    /* Style the button */
+    .btn-primary {
+        background-color: #ffffff; /* White background for the button */
+        color: #1134A6; /* Blue text color for the button */
+        border-color: #1134A6;
+    }
+
+        .btn-primary:hover {
+            background-color: #1134A6; /* Blue background on hover */
+            color: #ffffff; /* White text color on hover */
+            border-color: #1134A6;
+        }
+</style>
+
+<div class="center-form">
+    <form method="post" action="/SendEmail">
+        @for (var i = 0; i < Model.listEmails.Count; i++)
+        {
+            var email = Model.listEmails[i];
+            <div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right">FROM</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="EmailSender_@i" name="Sender" value="@email.EmailSender" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right">SUBJECT</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="subject_@i" name="EmailSubject" value="@email.EmailSubject" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-right">MESSAGE</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="message_@i" name="EmailMessage" rows="10" readonly>@email.EmailMessage</textarea>
+                    </div>
+                </div>
+
+                <a class="btn btn-primary btn-sm" href="/index">Home</a>
+
+                <a class="btn btn-danger btn-sm" href="DeleteEmail?emailid=@email.EmailID">Delete</a>
+            </div>
+        }
+
+        @if (Model.listEmails.Count == 0)
+        {
+            <p>No emails found.</p>
+        }
+    </form>
+</div>
