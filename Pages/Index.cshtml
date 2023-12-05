@@ -6,6 +6,37 @@
 
 <center><img src="images/logo.jpg" width="400" /></center>
 
+
+<style>
+    /* ... (Your existing styles remain unchanged) ... */
+
+    /* Style for the delete button */
+    .btn-delete {
+        background-color: #1134A6;
+        color: #ffffff;
+        border: 1px solid #1134A6;
+    }
+
+        .btn-delete:hover {
+            background-color: #CC0000;
+            color: #ffffff;
+        }
+
+    /* Style for the compose button */
+    .btn-compose {
+        background-color: #4CBB17;
+        color: #ffffff;
+        border: 1px solid #086623;
+    }
+
+        .btn-compose:hover {
+            background-color: #086623;
+            color: #ffffff;
+        }
+</style>
+
+
+
 <table class="table">
     <thead>
         <!-- Corrected tag name -->
@@ -46,10 +77,10 @@
                 <td>
 
 
-                    
 
 
-                    <a class="btn btn-primary btn-sm" href="DeleteEmail?emailid=@item.EmailID">Delete</a>
+
+                    <a class="btn btn-primary btn-delete btn-sm" href="DeleteEmail?emailid=@item.EmailID">Delete</a>
                 
 
                 </td>
@@ -60,4 +91,4 @@
 </table>
 
 
-<a class="btn btn-primary btn-sm" href="/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
+<a class="btn btn-primary btn-compose btn-sm" href="/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
