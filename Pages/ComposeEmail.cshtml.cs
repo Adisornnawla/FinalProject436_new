@@ -36,6 +36,7 @@ namespace FinalProject.Pages
             {
                 string currentUserName = User.Identity.Name;
 
+                Console.WriteLine($"Email Receiver: {emailInfo.EmailReceiver}");
 
                 if (emailInfo.EmailReceiver.Equals(currentUserName, StringComparison.OrdinalIgnoreCase))
                 {
@@ -43,9 +44,9 @@ namespace FinalProject.Pages
                     return;
                 }
 
-                if (!IsUserExists(emailInfo.EmailReceiver))
+                if (!UserExists(emailInfo.EmailReceiver))
                 {
-                    errorMessage = "The specified recipient does not exist.";
+                    errorMessage = "Recipient does not exist. Unable to send email.";
                     return;
                 }
 
@@ -94,19 +95,18 @@ namespace FinalProject.Pages
 			
 
 		}
-        private bool IsUserExists(string username)
+        private bool UserExists(string username)
         {
-            string connectionString = "Server=tcp:adis123.database.windows.net,1433;Initial Catalog=adis;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            String connectionString = "Server=tcp:adis123.database.windows.net,1433;Initial Catalog=adis;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-
-                string sql = "SELECT COUNT(*) FROM emails WHERE emailreceiver='" + username + "'";
+                String sql = "SELECT COUNT(*) FROM emails WHERE emailreceiver = @UserName";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.AddWithValue("@Username", username);
+                    command.Parameters.AddWithValue("@UserName", username);
 
                     int count = (int)command.ExecuteScalar();
 
@@ -114,6 +114,7 @@ namespace FinalProject.Pages
                 }
             }
         }
+
 
     }
 }
