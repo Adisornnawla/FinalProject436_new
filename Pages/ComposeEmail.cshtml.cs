@@ -43,6 +43,12 @@ namespace FinalProject.Pages
                     return;
                 }
 
+                if (!IsUserExists(emailInfo.EmailReceiver))
+                {
+                    errorMessage = "The specified recipient does not exist.";
+                    return;
+                }
+
 
                 String connectionString = "Server=tcp:adis123.database.windows.net,1433;Initial Catalog=adis;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
@@ -66,16 +72,20 @@ namespace FinalProject.Pages
 					}
 
                 }
-				successMessage = " Correctly";
+                successMessage = "Email sent successfully.";
 
-				Response.Redirect("/index");
-			}
+                // Set TempData to pass the success message to the view
+                TempData["SuccessMessage"] = successMessage;
+
+                Response.Redirect("/index");
+            }
             catch (Exception ex) 
             {
-				errorMessage = ex.Message;
                 errorMessage = "An error occurred while sending the email. Please log in before using.";
+                errorMessage += Environment.NewLine + ex.Message;
                 return;
-			}
+
+            }
             emailInfo.EmailReceiver = "";
             emailInfo.EmailSubject = "";
             emailInfo.EmailMessage = "";
@@ -84,6 +94,26 @@ namespace FinalProject.Pages
 			
 
 		}
+        private bool IsUserExists(string username)
+        {
+            string connectionString = "Server=tcp:adis123.database.windows.net,1433;Initial Catalog=adis;Persist Security Info=False;User ID=adis123;Password=123456sS*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string sql = "SELECT COUNT(*) FROM emails WHERE emailreceiver='" + username + "'";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+
+                    int count = (int)command.ExecuteScalar();
+
+                    return count > 0;
+                }
+            }
+        }
 
     }
 }
