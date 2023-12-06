@@ -56,18 +56,19 @@ namespace FinalProject.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255, ErrorMessage = "The First Name must be in between 1 to 255.", MinimumLength = 1)]
+            [RegularExpression("^[A-Za-z]+$", ErrorMessage = "Only letters are allowed.")]
             public string FirstName { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "The Last Name must be in between 1 to 255.", MinimumLength = 1)]
+            [RegularExpression("^[A-Za-z]+$", ErrorMessage = "Only letters are allowed.")]
             public string LastName { get; set; }
 
             [Required]
-            [StringLength(15, ErrorMessage = "The Mobile Phone must be in between 7 to 15.", MinimumLength = 7)]
+            [RegularExpression("^[0-9]{7,15}$", ErrorMessage = "Mobile Phone must be between 7 to 15 digits.")]
             public string MobilePhone { get; set; }
 
             [Required]
+            [RegularExpression("^(?=.*[A-Za-z])[A-Za-z0-9]+$", ErrorMessage = "Must contain at least one letter and only alphanumeric characters are allowed.")]
             [StringLength(255, ErrorMessage = "The Username must be between 1 to 255.", MinimumLength = 1)]
             public string UserName { get; set; }
 
